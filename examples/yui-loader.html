@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RequireJS Async plugin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .info{background-color:#cfc; border:2px solid #ada; padding:10px 20px;  margin:2em 0}
+        </style>
+    </head>
+    <body>
+        <div id="output">
+                if APP.use is defined, the dumy function is invalid;
+                <div id="boxy"></div>
+                <div id="jquery"></div>
+        </div>
+        <script src="../lib/require.js"></script>
+        <script>
+            require({
+                waitSeconds : 120, //make sure it is enough to load all gmaps scripts
+                paths : {
+                    'yui-loader' : '../src/yui-loader' //alias to plugin
+                }
+            });
+
+
+            // you can use a "!callbackName" at the end of the URL
+            // to specify name of parameter that expects callback function name
+            // the default value is "!callback" if not present.
+            // Notice that flickr uses "!jsoncallback".
+            require(['yui-loader!boxy', 'yui-loader!jquery-1.8.2'], function(){
+                document.getElementById('boxy').innerHTML = boxy.name + ' loaded';
+                document.getElementById('jquery').innerHTML = window['jquery-1.8.2'].name + ' loaded';
+            });
+
+        </script>
+    </body>
+</html>
